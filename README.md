@@ -6,10 +6,10 @@ Losing customers (churn) directly hurts recurring revenue. This project identifi
 ## 📁 Repo Structure
 ```
 ├── Churn_Analysis.pbix              # Power BI dashboard
-├── sql/churn_etl.sql                # Staging → cleaning → production tables → views
-├── python/churn_prediction_model.ipynb  # Random Forest churn prediction
-├── dax/measures.dax                 # All DAX measures used in the dashboard
-└── README.md
+├── README.md
+├── churn_etl.sql                    # Staging → cleaning → production tables → views
+├── churn_prediction_model.ipynb     # Random Forest churn prediction
+└── 
 ```
 
 ## 📊 Dataset Source
@@ -20,11 +20,11 @@ Telecom customer dataset (IBM-style Telco Churn schema) — one row per customer
 
 ## 🖼️ Screenshots
 
-**Summary Page**
-![Summary Page](screenshots/summary_page.png)
-
 **Churn Prediction Page**
-![Churn Prediction Page](screenshots/churn_prediction_page.png)
+![Churn Prediction Page](churn_prediction_page.png)
+
+**Summary Page**
+![Summary Page](summary_page.png)
 
 ## 🗂️ Dashboard Pages
 1. **Summary** — churn overview: KPIs (Total Customers, Churn Rate, Revenue at Risk), broken down by gender, age group, contract type, payment method, tenure, state, internet type, and churn reason.
@@ -32,7 +32,7 @@ Telecom customer dataset (IBM-style Telco Churn schema) — one row per customer
 3. **Tool Tip** — hover tooltip page (Churn Reason vs Total Churn).
 
 ## 🧮 Key DAX Measures
-See [`dax/measures.dax`](dax/measures.dax) for the full file. Core logic:
+See Core logic:
 
 | Measure | Logic | What it means |
 |---|---|---|
@@ -43,14 +43,14 @@ See [`dax/measures.dax`](dax/measures.dax) for the full file. Core logic:
 | `New Joiners` | Customers with status = "Joined" | Growth offsetting churn |
 
 ## 🗄️ SQL (ETL)
-Full script: [`sql/churn_etl.sql`](sql/churn_etl.sql). Summary:
+Full script: [`sql/churn_etl.sql`](churn_etl.sql). Summary:
 1. Load raw CSV into a `stg_Churn` staging table
 2. Explore data quality — distinct-value checks per category, null counts across all columns
 3. Clean nulls (defaults like `'None'`/`'No'`) and load into `prod_Churn`
 4. Create two views: `vw_ChurnData` (Churned + Stayed → model training) and `vw_JoinData` (active Joiners → model scoring)
 
 ## 🐍 Python (Prediction Model)
-Full notebook: [`python/churn_prediction_model.ipynb`](python/churn_prediction_model.ipynb). Summary:
+Full notebook: [`python/churn_prediction_model.ipynb`](churn_prediction_model.ipynb). Summary:
 - Pulled `vw_ChurnData`, label-encoded categorical fields, target = `Customer_Status` (Stayed=0, Churned=1)
 - Trained a `RandomForestClassifier` (100 trees), 80/20 train-test split
 - Applied the trained model to `vw_JoinData` to flag likely churners → `Predictions.csv` → re-imported into Power BI
@@ -135,4 +135,4 @@ Besides making great dashboards, I also help clients understand the data and mak
 ## 🚀 How to Use
 1. Open `Churn_Analysis.pbix` in Power BI Desktop.
 2. Explore the **Summary** page for diagnosis, **Churn Prediction** for forward-looking action.
-3. Review `sql/`, `python/`, `dax/` for the full pipeline behind the dashboard.
+3. Review `sql/`, `python/` for the full pipeline behind the dashboard.
