@@ -22,7 +22,7 @@ Telecom customer dataset (IBM-style Telco Churn schema) — one row per customer
 ## 🖼️ Screenshots
 
 **Summary Page**
-![Summary Page](screenshots/summary_page.png)
+![Summary Page](Screenshot 2026-07-02 170948.png)
 
 **Churn Prediction Page**
 ![Churn Prediction Page](screenshots/churn_prediction_page.png)
