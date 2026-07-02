@@ -24,7 +24,7 @@ Telecom customer dataset (IBM-style Telco Churn schema) — one row per customer
 ![Churn Prediction Page](screenshotschurn_prediction_page.png)
 
 **Summary Page**
-![Summary Page](summary_page.png)
+![Summary Page](screenshotssummary_page.png.png)
 
 ## 🗂️ Dashboard Pages
 1. **Summary** — churn overview: KPIs (Total Customers, Churn Rate, Revenue at Risk), broken down by gender, age group, contract type, payment method, tenure, state, internet type, and churn reason.
