@@ -33,7 +33,7 @@ Telecom customer dataset (IBM-style Telco Churn schema) — one row per customer
 3. **Tool Tip** — hover tooltip page (Churn Reason vs Total Churn).
 
 ## 🧮 Key DAX Measures
-See [`dax/measures.dax`](dax/measures.dax) for the full file. Core logic:
+See Core logic:
 
 | Measure | Logic | What it means |
 |---|---|---|
