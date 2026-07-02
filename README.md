@@ -3,6 +3,33 @@
 ## 📌 Business Problem
 Losing customers (churn) directly hurts recurring revenue. This project identifies **who is churning, why, and who is likely to churn next**, so the business can intervene before losing more revenue.
 
+
+## 🏗️ Project Architecture
+
+```text
+                 Telecom Customer Dataset (CSV)
+                            │
+                            ▼
+                   SQL Server (Staging)
+                            │
+             Data Cleaning & Transformation
+                            │
+                            ▼
+                  Production Tables (prod_*)
+                            │
+              SQL Views (vw_ChurnData, vw_JoinData)
+                   │                     │
+                   │                     │
+                   ▼                     ▼
+        Power BI Dashboard      Python (Random Forest)
+                   ▲                     │
+                   │                     ▼
+                   └──── Predictions.csv ─────┘
+                            │
+                            ▼
+                Interactive Churn Dashboard
+```
+
 ## 📁 Repo Structure
 ```
 ├── Churn_Analysis.pbix              # Power BI dashboard
@@ -17,6 +44,45 @@ Telecom customer dataset (IBM-style Telco Churn schema) — one row per customer
 - **6,418 customers** (`prod_Churn`)
 - **77,016 service records** (`prod_Services`, unpivoted from wide service columns)
 - **374 active customers** scored by the model as likely future churners (`Predictions`)
+
+## 📖 Data Dictionary
+
+The dataset contains customer demographic, account, service, and churn-related information used for churn analysis and prediction.
+
+| Column | Data Type | Description |
+|---------|-----------|-------------|
+| Customer_ID | Integer | Unique identifier assigned to each customer. |
+| Gender | Text | Customer's gender (Male/Female). |
+| Age | Integer | Customer's age in years. |
+| Married | Text | Indicates whether the customer is married (Yes/No). |
+| State | Text | State where the customer resides. |
+| Number_of_Referrals | Integer | Number of customers referred by this customer. |
+| Tenure_in_Months | Integer | Number of months the customer has been with the company. |
+| Value_Deal | Text | Promotional offer or discount applied to the customer's account. |
+| Phone_Service | Text | Indicates whether the customer subscribes to phone service. |
+| Multiple_Lines | Text | Indicates whether the customer has multiple phone lines. |
+| Internet_Service | Text | Indicates whether the customer subscribes to internet service. |
+| Internet_Type | Text | Internet technology used (Fiber Optic, DSL, Cable, etc.). |
+| Online_Security | Text | Whether online security service is enabled. |
+| Online_Backup | Text | Whether online backup service is enabled. |
+| Device_Protection_Plan | Text | Whether device protection is subscribed. |
+| Premium_Support | Text | Whether premium technical support is active. |
+| Streaming_TV | Text | Whether streaming TV service is subscribed. |
+| Streaming_Movies | Text | Whether streaming movie service is subscribed. |
+| Streaming_Music | Text | Whether streaming music service is subscribed. |
+| Unlimited_Data | Text | Indicates whether unlimited data is included. |
+| Contract | Text | Customer contract type (Month-to-Month, One Year, Two Year). |
+| Paperless_Billing | Text | Indicates whether paperless billing is enabled. |
+| Payment_Method | Text | Customer's payment method. |
+| Monthly_Charge | Decimal | Monthly subscription charge. |
+| Total_Charges | Decimal | Total charges incurred by the customer. |
+| Total_Refunds | Decimal | Total refunds issued to the customer. |
+| Total_Extra_Data_Charges | Decimal | Charges for additional data usage. |
+| Total_Long_Distance_Charges | Decimal | Charges for long-distance calls. |
+| Total_Revenue | Decimal | Total revenue generated from the customer. |
+| Customer_Status | Text | Current customer status (Stayed, Churned, Joined). |
+| Churn_Category | Text | High-level category describing why the customer churned. |
+| Churn_Reason | Text | Specific reason the customer left the service. |
 
 ## 🖼️ Screenshots
 
@@ -136,3 +202,19 @@ Besides making great dashboards, I also help clients understand the data and mak
 1. Open `Churn_Analysis.pbix` in Power BI Desktop.
 2. Explore the **Summary** page for diagnosis, **Churn Prediction** for forward-looking action.
 3. Review `sql/`, `python/` for the full pipeline behind the dashboard.
+
+
+## 📚 Lessons Learned
+
+During this project, I gained hands-on experience in building an end-to-end analytics solution rather than just creating dashboards.
+
+### Key Takeaways
+
+- Designed a SQL ETL pipeline to transform raw customer data into analysis-ready tables.
+- Improved data quality by handling missing values and validating categorical fields.
+- Built reusable SQL views to separate historical churn data from active customers.
+- Learned how feature engineering and data preprocessing affect machine learning performance.
+- Evaluated the Random Forest model using precision, recall, F1-score, and confusion matrix instead of relying solely on accuracy.
+- Applied DAX and Power Query to create interactive KPIs and dynamic visualizations.
+- Converted business questions into actionable insights and recommendations.
+- Improved project documentation and GitHub organization to make the work reproducible and easier to understand.
